@@ -26,6 +26,10 @@
             <tab type="user"  visible="yes" title="Advanced: Create new view" url="\ref core_custom_view"   intro=""/>
         </tab>
 
+        <tab type="usergroup" visible="${BIOCPP_HAS_IO}" title="I/O library" intro="">
+            <tab type="user" visible="${BIOCPP_HAS_IO}" title="Overview" url="\ref io_overview" intro=""/>
+            <tab type="user" visible="${BIOCPP_HAS_IO}" title="Changelog" url="\ref io_changelog" intro=""/>
+        </tab>
         <!-- TODO include other repo pages here automatically-->
 
         <tab type="modules" visible="yes" title="API Reference (Modules)" intro=""/>

@@ -9,7 +9,8 @@ cmake_minimum_required (VERSION 3.7)
 
 ### Find doxygen and dependency to DOT tool
 message (STATUS "Searching for doxygen.")
-find_package (Doxygen REQUIRED)
+
+find_package (Doxygen REQUIRED dot)
 
 if (NOT ${DOXYGEN_FOUND})
     message (FATAL_ERROR "Could not find doxygen. Not building documentation.")
@@ -46,10 +47,12 @@ ExternalProject_Add (
     INSTALL_COMMAND ""
 )
 
-if (BIOCPP_USER_DOC)
-    message (STATUS "Configuring user doc.")
+set (BIOCPP_HAS_IO "no")
 
-    set (BIOCPP_DOXYGEN_OUTPUT_DIR "${PROJECT_BINARY_DIR}/doc_usr")
+if (BIOCPP_USER_DOC)
+    message (STATUS "Configuring core user documentation.")
+
+    set (BIOCPP_DOXYGEN_OUTPUT_DIR "${PROJECT_BINARY_DIR}/core_usr")
     set (BIOCPP_DOXYGEN_SOURCE_DIR "${BIOCPP_CORE_CLONE_DIR}")
     set (BIOCPP_DOXYGEN_EXCLUDE_SYMBOLS "detail biocpp::simd") #/""
     set (BIOCPP_DOXYGEN_PREDEFINED_NDEBUG "-NDEBUG") #/""
@@ -57,19 +60,20 @@ if (BIOCPP_USER_DOC)
     set (BIOCPP_DOXYGEN_EXTRACT_PRIVATE "NO") #/"YES":
 
     configure_file (${BIOCPP_DOXYFILE_IN} ${BIOCPP_DOXYGEN_OUTPUT_DIR}/Doxyfile)
+    configure_file (${BIOCPP_DOXYGEN_INPUT_DIR}/DoxygenLayout.xml.in ${BIOCPP_DOXYGEN_OUTPUT_DIR}/DoxygenLayout.xml)
 
-    add_custom_target(doc_usr ALL
+    add_custom_target(core_usr ALL
                       COMMAND ${DOXYGEN_EXECUTABLE}
                       WORKING_DIRECTORY ${BIOCPP_DOXYGEN_OUTPUT_DIR}
                       DEPENDS download-cppreference-doxygen-web-tag
-                      COMMENT "Generating user API documentation with Doxygen"
+                      COMMENT "Generating core user documentation."
                       VERBATIM)
 endif ()
 
 if (BIOCPP_DEV_DOC)
-    message(STATUS "Configuring devel doc.")
+    message(STATUS "Configuring core developer documentation.")
 
-    set(BIOCPP_DOXYGEN_OUTPUT_DIR "${PROJECT_BINARY_DIR}/doc_dev")
+    set(BIOCPP_DOXYGEN_OUTPUT_DIR "${PROJECT_BINARY_DIR}/core_dev")
     set(BIOCPP_DOXYGEN_SOURCE_DIR "${BIOCPP_CORE_CLONE_DIR}")
     set(BIOCPP_DOXYGEN_EXCLUDE_SYMBOLS "")
     set(BIOCPP_DOXYGEN_PREDEFINED_NDEBUG "")
@@ -77,12 +81,12 @@ if (BIOCPP_DEV_DOC)
     set(BIOCPP_DOXYGEN_EXTRACT_PRIVATE "YES")
 
     configure_file(${BIOCPP_DOXYFILE_IN} ${BIOCPP_DOXYGEN_OUTPUT_DIR}/Doxyfile)
+    configure_file (${BIOCPP_DOXYGEN_INPUT_DIR}/DoxygenLayout.xml.in ${BIOCPP_DOXYGEN_OUTPUT_DIR}/DoxygenLayout.xml)
 
-    add_custom_target(doc_dev ALL
+    add_custom_target(core_dev ALL
                       COMMAND ${DOXYGEN_EXECUTABLE}
                       WORKING_DIRECTORY ${BIOCPP_DOXYGEN_OUTPUT_DIR}
                       DEPENDS download-cppreference-doxygen-web-tag
-                      COMMENT "Generating developer API documentation with Doxygen"
+                      COMMENT "Generating core user documentation."
                       VERBATIM)
-                      message (STATUS "Add devel doc test.")
 endif ()

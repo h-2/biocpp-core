@@ -2,7 +2,7 @@ PROJECT_NAME           = "BioC++"
 PROJECT_BRIEF          = "The Modern C++ libraries for Bioinformatics."
 PROJECT_LOGO           = ${BIOCPP_DOXYGEN_SOURCE_DIR}/test/documentation/biocpp_logo.svg
 PROJECT_NUMBER         = ${BIOCPP_VERSION}
-LAYOUT_FILE            = ${BIOCPP_DOXYGEN_SOURCE_DIR}/test/documentation/DoxygenLayout.xml
+LAYOUT_FILE            = ${BIOCPP_DOXYGEN_OUTPUT_DIR}/DoxygenLayout.xml
 
 ## PATHS
 OUTPUT_DIRECTORY       = ${BIOCPP_DOXYGEN_OUTPUT_DIR}
