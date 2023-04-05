@@ -8,7 +8,6 @@
 
 #include <iostream>
 #include <iterator>
-#include <ranges>
 
 #include <gtest/gtest.h>
 

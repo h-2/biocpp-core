@@ -15,7 +15,6 @@
 
 #include <concepts>
 #include <iterator>
-#include <ranges>
 #include <span>
 #include <stdexcept>
 #include <type_traits>

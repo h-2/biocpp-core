@@ -14,10 +14,10 @@
 
 #pragma once
 
-#include <ranges>
 #include <tuple>
 
 #include <bio/meta/type_traits/basic.hpp>
+#include <bio/ranges/concept.hpp>
 #include <bio/ranges/type_traits.hpp>
 
 namespace bio::ranges::detail

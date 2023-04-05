@@ -9,7 +9,6 @@
 #pragma once
 
 #include <iterator>
-#include <ranges>
 
 #include <gtest/gtest.h>
 

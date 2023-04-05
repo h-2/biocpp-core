@@ -13,10 +13,9 @@
 
 #pragma once
 
-#include <ranges>
-
 #include <bio/alphabet/concept.hpp>
 #include <bio/alphabet/detail/to_lower.hpp>
+#include <bio/ranges/concept.hpp>
 #include <bio/ranges/views/deep.hpp>
 
 namespace bio::ranges::views

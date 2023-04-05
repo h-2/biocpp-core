@@ -15,8 +15,8 @@
 
 #include <cmath>
 #include <concepts>
-#include <ranges>
 
+#include <bio/ranges/concept.hpp>
 #include <bio/ranges/views/transform_by_pos.hpp>
 
 namespace bio::ranges::detail

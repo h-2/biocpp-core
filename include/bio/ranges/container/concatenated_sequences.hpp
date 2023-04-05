@@ -14,11 +14,11 @@
 #pragma once
 
 #include <iterator>
-#include <ranges>
 #include <type_traits>
 #include <utility>
 #include <vector>
 
+#include <bio/ranges/concept.hpp>
 #include <bio/ranges/container/concept.hpp>
 #include <bio/ranges/detail/random_access_iterator.hpp>
 #include <bio/ranges/views/repeat_n.hpp>

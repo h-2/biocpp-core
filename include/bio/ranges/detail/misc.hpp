@@ -13,9 +13,8 @@
 
 #pragma once
 
-#include <ranges>
-
 #include <bio/core.hpp>
+#include <bio/ranges/concept.hpp>
 
 namespace bio::ranges::detail
 {

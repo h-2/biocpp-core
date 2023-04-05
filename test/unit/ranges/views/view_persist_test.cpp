@@ -8,7 +8,6 @@
 
 #include <concepts>
 #include <iostream>
-#include <ranges>
 
 #include <gtest/gtest.h>
 

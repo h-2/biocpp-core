@@ -9,7 +9,6 @@
 #include <algorithm>
 #include <forward_list>
 #include <iostream>
-#include <ranges>
 
 #include <gtest/gtest.h>
 

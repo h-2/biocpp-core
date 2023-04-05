@@ -32,7 +32,7 @@
 
 #ifdef BIOCPP_HAS_SEQAN2
 
-#include <ranges>
+
 
 #include <seqan/basic.h>
 

@@ -14,8 +14,8 @@
 #pragma once
 
 #include <algorithm>
-#include <ranges>
 
+#include <bio/ranges/concept.hpp>
 #include <bio/ranges/detail/random_access_iterator.hpp>
 #include <bio/ranges/type_traits.hpp>
 

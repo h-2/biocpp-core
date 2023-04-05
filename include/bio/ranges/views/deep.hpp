@@ -13,8 +13,7 @@
 
 #pragma once
 
-#include <ranges>
-
+#include <bio/ranges/concept.hpp>
 #include <bio/ranges/views/detail.hpp>
 
 namespace bio::ranges::views

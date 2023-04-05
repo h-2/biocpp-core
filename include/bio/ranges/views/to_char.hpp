@@ -13,12 +13,11 @@
 
 #pragma once
 
-#include <ranges>
-
 #include <bio/alphabet/cigar/cigar.hpp>
 #include <bio/alphabet/concept.hpp>
 #include <bio/alphabet/custom/all.hpp>
 #include <bio/meta/overloaded.hpp>
+#include <bio/ranges/concept.hpp>
 #include <bio/ranges/type_traits.hpp>
 #include <bio/ranges/views/deep.hpp>
 #include <bio/ranges/views/type_reduce.hpp>

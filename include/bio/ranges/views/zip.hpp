@@ -15,7 +15,6 @@
 
 #include <algorithm>
 #include <functional>
-#include <ranges>
 
 #include <bio/ranges/concept.hpp>
 #include <bio/ranges/views/detail.hpp>

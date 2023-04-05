@@ -14,7 +14,6 @@
 #pragma once
 
 #include <cmath>
-#include <ranges>
 
 #include <bio/meta/type_traits/transformation_trait_or.hpp>
 #include <bio/ranges/concept.hpp>

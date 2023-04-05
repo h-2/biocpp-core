@@ -8,7 +8,6 @@
 
 #include <concepts>
 #include <forward_list>
-#include <ranges>
 
 #include <gtest/gtest.h>
 

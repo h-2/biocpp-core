@@ -13,9 +13,8 @@
 
 #pragma once
 
-#include <ranges>
-
 #include <bio/alphabet/nucleotide/concept.hpp>
+#include <bio/ranges/concept.hpp>
 #include <bio/ranges/views/deep.hpp>
 #include <bio/ranges/views/transform_by_pos.hpp>
 

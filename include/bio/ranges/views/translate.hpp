@@ -14,13 +14,13 @@
 #pragma once
 
 #include <concepts>
-#include <ranges>
 #include <stdexcept>
 #include <vector>
 
 #include <bio/alphabet/aminoacid/aa27.hpp>
 #include <bio/alphabet/aminoacid/translation.hpp>
 #include <bio/alphabet/nucleotide/dna5.hpp>
+#include <bio/ranges/concept.hpp>
 #include <bio/ranges/container/concept.hpp>
 #include <bio/ranges/container/small_string.hpp>
 #include <bio/ranges/detail/random_access_iterator.hpp>

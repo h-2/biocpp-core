@@ -13,9 +13,8 @@
 
 #pragma once
 
-#include <ranges>
-
 #include <bio/alphabet/quality/qualified.hpp>
+#include <bio/ranges/concept.hpp>
 #include <bio/ranges/views/deep.hpp>
 
 namespace bio::ranges::detail

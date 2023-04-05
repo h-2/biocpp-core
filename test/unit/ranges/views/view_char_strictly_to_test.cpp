@@ -7,7 +7,6 @@
 
 #include <algorithm>
 #include <iostream>
-#include <ranges>
 
 #include <gtest/gtest.h>
 

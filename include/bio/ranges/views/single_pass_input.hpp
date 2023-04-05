@@ -17,8 +17,8 @@
 #include <concepts>
 #include <iterator>
 #include <memory>
-#include <ranges>
 
+#include <bio/ranges/concept.hpp>
 #include <bio/ranges/views/detail.hpp>
 
 //-----------------------------------------------------------------------------

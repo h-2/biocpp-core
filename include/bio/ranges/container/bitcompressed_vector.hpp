@@ -16,10 +16,10 @@
 #include <climits>
 #include <concepts>
 #include <iterator>
-#include <ranges>
 #include <type_traits>
 
 #include <bio/alphabet/proxy_base.hpp>
+#include <bio/ranges/concept.hpp>
 #include <bio/ranges/detail/random_access_iterator.hpp>
 #include <bio/ranges/views/convert.hpp>
 #include <bio/ranges/views/repeat_n.hpp>

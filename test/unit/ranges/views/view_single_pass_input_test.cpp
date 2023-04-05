@@ -6,7 +6,6 @@
 // shipped with this file and also available at: https://github.com/biocpp/biocpp-core/blob/main/LICENSE.md
 // -----------------------------------------------------------------------------------------------------
 
-#include <ranges>
 #include <type_traits>
 #include <vector>
 

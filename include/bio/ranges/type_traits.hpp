@@ -14,11 +14,11 @@
 #pragma once
 
 #include <iterator>
-#include <ranges>
 #include <type_traits>
 
 #include <bio/core.hpp>
 #include <bio/meta/type_traits/basic.hpp>
+#include <bio/ranges/concept.hpp>
 
 namespace bio::ranges::detail
 {

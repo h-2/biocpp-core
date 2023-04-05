@@ -16,7 +16,7 @@
 #include <gtest/gtest.h>
 
 #include <algorithm>
-#include <ranges>
+#include <bio/ranges/concept.hpp>
 
 #include <bio/core.hpp>
 

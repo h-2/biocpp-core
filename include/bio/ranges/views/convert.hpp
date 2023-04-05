@@ -14,9 +14,9 @@
 #pragma once
 
 #include <concepts>
-#include <ranges>
 
 #include <bio/core.hpp>
+#include <bio/ranges/concept.hpp>
 
 namespace bio::ranges::views
 {

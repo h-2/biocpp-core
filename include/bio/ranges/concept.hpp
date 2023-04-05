@@ -13,6 +13,11 @@
 
 #pragma once
 
+// Needs to happen before <ranges>
+// clang-format off
+#include <bio/meta/pod_tuple.hpp>
+// clang-format on
+
 #include <ranges>
 
 #include <bio/alphabet/concept.hpp>
