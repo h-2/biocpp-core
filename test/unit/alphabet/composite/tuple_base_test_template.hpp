@@ -11,8 +11,6 @@
 #include <bio/alphabet/composite/tuple_base.hpp>
 #include <bio/meta/concept/tuple.hpp>
 
-using bio::meta::get;
-
 template <typename T>
 class tuple_base_test : public ::testing::Test
 {};

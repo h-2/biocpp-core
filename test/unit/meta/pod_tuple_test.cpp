@@ -93,17 +93,28 @@ TEST(pod_tuple_swap, swap)
     EXPECT_EQ(t1, t3);
 }
 
-// get<1>
-TEST(pod_tuple_get_i, get_i)
+// ADL get<1>
+TEST(pod_tuple, adl_get_i)
 {
-    bio::meta::pod_tuple<int, long, float> t0{4, 7l, 3.0f};
+    {
+        bio::meta::pod_tuple<int, long, float> t0{4, 7l, 3.0f};
 
-    static_assert(std::is_same_v<decltype(bio::meta::get<0>(t0)), int &>);
-    static_assert(std::is_same_v<decltype(bio::meta::get<1>(t0)), long &>);
-    static_assert(std::is_same_v<decltype(bio::meta::get<2>(t0)), float &>);
-    EXPECT_EQ(bio::meta::get<0>(t0), 4);
-    EXPECT_EQ(bio::meta::get<1>(t0), 7l);
-    EXPECT_EQ(bio::meta::get<2>(t0), 3.0f);
+        static_assert(std::is_same_v<decltype(get<0>(t0)), int &>);
+        static_assert(std::is_same_v<decltype(get<1>(t0)), long &>);
+        static_assert(std::is_same_v<decltype(get<2>(t0)), float &>);
+        EXPECT_EQ(get<0>(t0), 4);
+        EXPECT_EQ(get<1>(t0), 7l);
+        EXPECT_EQ(get<2>(t0), 3.0f);
+    }
+
+    {
+        static_assert(std::is_same_v<decltype(get<0>(bio::meta::pod_tuple<int, long, float>{4, 7l, 3.0f})), int &&>);
+        static_assert(std::is_same_v<decltype(get<1>(bio::meta::pod_tuple<int, long, float>{4, 7l, 3.0f})), long &&>);
+        static_assert(std::is_same_v<decltype(get<2>(bio::meta::pod_tuple<int, long, float>{4, 7l, 3.0f})), float &&>);
+        EXPECT_EQ(get<0>(bio::meta::pod_tuple<int, long, float>{4, 7l, 3.0f}), 4);
+        EXPECT_EQ(get<1>(bio::meta::pod_tuple<int, long, float>{4, 7l, 3.0f}), 7l);
+        EXPECT_EQ(get<2>(bio::meta::pod_tuple<int, long, float>{4, 7l, 3.0f}), 3.0f);
+    }
 }
 
 // std::get<1>
@@ -130,45 +141,45 @@ TEST(pod_tuple_struct_binding, struct_binding)
     EXPECT_EQ(f, 3.0f);
 }
 
-// get<type>
-TEST(pod_tuple_get_type, get_type)
+// adl_get<type>
+TEST(pod_tuple_get_type, adl_get_type)
 {
     using pt  = bio::meta::pod_tuple<int, long, float>;
     using ptc = pt const;
     pt  t0{4, 7l, 3.0f};
     ptc t1{4, 7l, 3.0f};
 
-    static_assert(std::is_same_v<decltype(bio::meta::get<int>(t0)), int &>);
-    static_assert(std::is_same_v<decltype(bio::meta::get<long>(t0)), long &>);
-    static_assert(std::is_same_v<decltype(bio::meta::get<float>(t0)), float &>);
+    static_assert(std::is_same_v<decltype(get<int>(t0)), int &>);
+    static_assert(std::is_same_v<decltype(get<long>(t0)), long &>);
+    static_assert(std::is_same_v<decltype(get<float>(t0)), float &>);
 
-    static_assert(std::is_same_v<decltype(bio::meta::get<int>(t1)), int const &>);
-    static_assert(std::is_same_v<decltype(bio::meta::get<long>(t1)), long const &>);
-    static_assert(std::is_same_v<decltype(bio::meta::get<float>(t1)), float const &>);
+    static_assert(std::is_same_v<decltype(get<int>(t1)), int const &>);
+    static_assert(std::is_same_v<decltype(get<long>(t1)), long const &>);
+    static_assert(std::is_same_v<decltype(get<float>(t1)), float const &>);
 
-    static_assert(std::is_same_v<decltype(bio::meta::get<int>(pt{4, 7l, 3.0f})), int &&>);
-    static_assert(std::is_same_v<decltype(bio::meta::get<long>(pt{4, 7l, 3.0f})), long &&>);
-    static_assert(std::is_same_v<decltype(bio::meta::get<float>(pt{4, 7l, 3.0f})), float &&>);
+    static_assert(std::is_same_v<decltype(get<int>(pt{4, 7l, 3.0f})), int &&>);
+    static_assert(std::is_same_v<decltype(get<long>(pt{4, 7l, 3.0f})), long &&>);
+    static_assert(std::is_same_v<decltype(get<float>(pt{4, 7l, 3.0f})), float &&>);
 
-    static_assert(std::is_same_v<decltype(bio::meta::get<int>(ptc{4, 7l, 3.0f})), int const &&>);
-    static_assert(std::is_same_v<decltype(bio::meta::get<long>(ptc{4, 7l, 3.0f})), long const &&>);
-    static_assert(std::is_same_v<decltype(bio::meta::get<float>(ptc{4, 7l, 3.0f})), float const &&>);
+    static_assert(std::is_same_v<decltype(get<int>(ptc{4, 7l, 3.0f})), int const &&>);
+    static_assert(std::is_same_v<decltype(get<long>(ptc{4, 7l, 3.0f})), long const &&>);
+    static_assert(std::is_same_v<decltype(get<float>(ptc{4, 7l, 3.0f})), float const &&>);
 
-    EXPECT_EQ(bio::meta::get<int>(t0), 4);
-    EXPECT_EQ(bio::meta::get<long>(t0), 7l);
-    EXPECT_EQ(bio::meta::get<float>(t0), 3.0f);
+    EXPECT_EQ(get<int>(t0), 4);
+    EXPECT_EQ(get<long>(t0), 7l);
+    EXPECT_EQ(get<float>(t0), 3.0f);
 
-    EXPECT_EQ(bio::meta::get<int>(t1), 4);
-    EXPECT_EQ(bio::meta::get<long>(t1), 7l);
-    EXPECT_EQ(bio::meta::get<float>(t1), 3.0f);
+    EXPECT_EQ(get<int>(t1), 4);
+    EXPECT_EQ(get<long>(t1), 7l);
+    EXPECT_EQ(get<float>(t1), 3.0f);
 
-    EXPECT_EQ(bio::meta::get<int>(pt{4, 7l, 3.0f}), 4);
-    EXPECT_EQ(bio::meta::get<long>(pt{4, 7l, 3.0f}), 7l);
-    EXPECT_EQ(bio::meta::get<float>(pt{4, 7l, 3.0f}), 3.0f);
+    EXPECT_EQ(get<int>(pt{4, 7l, 3.0f}), 4);
+    EXPECT_EQ(get<long>(pt{4, 7l, 3.0f}), 7l);
+    EXPECT_EQ(get<float>(pt{4, 7l, 3.0f}), 3.0f);
 
-    EXPECT_EQ(bio::meta::get<int>(ptc{4, 7l, 3.0f}), 4);
-    EXPECT_EQ(bio::meta::get<long>(ptc{4, 7l, 3.0f}), 7l);
-    EXPECT_EQ(bio::meta::get<float>(ptc{4, 7l, 3.0f}), 3.0f);
+    EXPECT_EQ(get<int>(ptc{4, 7l, 3.0f}), 4);
+    EXPECT_EQ(get<long>(ptc{4, 7l, 3.0f}), 7l);
+    EXPECT_EQ(get<float>(ptc{4, 7l, 3.0f}), 3.0f);
 }
 
 // std::get<type>
@@ -226,12 +237,28 @@ TEST(pod_tuple_tuple_element, tuple_element)
 // type deduction
 TEST(pod_tuple_type_deduce, type_deduce)
 {
-    bio::meta::pod_tuple t0{4, 7l, 3.0f};
-    using pt = decltype(t0);
+    {
+        bio::meta::pod_tuple t0{4, 7l, 3.0f};
+        using pt = decltype(t0);
 
-    static_assert(std::is_same_v<std::tuple_element_t<0, pt>, int>);
-    static_assert(std::is_same_v<std::tuple_element_t<1, pt>, long>);
-    static_assert(std::is_same_v<std::tuple_element_t<2, pt>, float>);
+        static_assert(std::same_as<pt, bio::meta::pod_tuple<int, long, float>>);
+        static_assert(std::is_same_v<std::tuple_element_t<0, pt>, int>);
+        static_assert(std::is_same_v<std::tuple_element_t<1, pt>, long>);
+        static_assert(std::is_same_v<std::tuple_element_t<2, pt>, float>);
+    }
+
+    {
+        int                  i = 4;
+        long const           l = 7l;
+        float                f = 3.0f;
+        bio::meta::pod_tuple t0{i, l, f};
+        using pt = decltype(t0);
+
+        static_assert(std::same_as<pt, bio::meta::pod_tuple<int &, long const &, float &>>);
+        static_assert(std::is_same_v<std::tuple_element_t<0, pt>, int &>);
+        static_assert(std::is_same_v<std::tuple_element_t<1, pt>, long const &>);
+        static_assert(std::is_same_v<std::tuple_element_t<2, pt>, float &>);
+    }
 }
 
 // comparison operators
@@ -248,4 +275,20 @@ TEST(pod_tuple_cmp, cmp)
     EXPECT_GE(t1, t1);
     EXPECT_GE(t2, t1);
     EXPECT_GT(t2, t1);
+}
+
+TEST(pod_tuple, common_reference_t)
+{
+    EXPECT_TRUE(
+      (std::common_reference_with<bio::meta::pod_tuple<int const &, int &> &&, bio::meta::pod_tuple<int, int> &>));
+
+    EXPECT_TRUE((std::common_reference_with<bio::meta::pod_tuple<int const &, int &, int> &&,
+                                            bio::meta::pod_tuple<int, int, int> &>));
+}
+
+TEST(pod_tuple, convertible)
+{
+    static_assert(std::convertible_to<int const &, int>);
+    static_assert(std::convertible_to<int &, int>);
+    static_assert(std::convertible_to<bio::meta::pod_tuple<int const &, int &>, bio::meta::pod_tuple<int, int>>);
 }
