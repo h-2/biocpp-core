@@ -6,9 +6,6 @@
 // shipped with this file and also available at: https://github.com/biocpp/biocpp-core/blob/main/LICENSE.md
 // -----------------------------------------------------------------------------------------------------
 
-#include <ranges>
-#include <variant>
-
 #include <gtest/gtest.h>
 
 #include <bio/alphabet/nucleotide/dna4.hpp>
@@ -31,6 +28,10 @@ TEST(dictionary_test, concepts)
     EXPECT_FALSE(std::ranges::contiguous_range<TypeParam>); // reference != value_type &
     EXPECT_TRUE(std::ranges::sized_range<TypeParam>);
     EXPECT_TRUE(std::ranges::common_range<TypeParam>);
+
+    EXPECT_TRUE(std::ranges::random_access_range<TypeParam const>);
+    EXPECT_TRUE(std::ranges::sized_range<TypeParam const>);
+    EXPECT_TRUE(std::ranges::common_range<TypeParam const>);
 
     EXPECT_FALSE((std::ranges::output_range<TypeParam, value_t>)); // can't assign to reference
     EXPECT_TRUE((bio::ranges::back_insertable<TypeParam>));        // but can insert
@@ -392,6 +393,19 @@ TEST(dictionary_test, push_pop)
     EXPECT_THROW((t0.emplace_back("A", mapped)), std::runtime_error);
 }
 
+TEST(dictionary_test, views_elements)
+{
+    TypeParam t{
+      value_t{"A", mapped},
+      value_t{"B", mapped},
+      value_t{"C", mapped},
+      value_t{"D", mapped}
+    };
+
+    auto keys = std::views::elements<0>(t);
+    EXPECT_RANGE_EQ(keys, (std::vector<std::string_view>{"A", "B", "C", "D"}));
+}
+
 //========================================================================
 // context-aware element types
 //========================================================================
@@ -436,14 +450,14 @@ TEST(het_dictionary_test, elem_t_test)
 }
 
 inline bio::ranges::dictionary<std::string, elem_t, true> dict{
-  std::tuple{"string"s, elem1},
-  std::tuple{   "int"s, elem2}
+  bio::meta::pod_tuple{"string"s, elem1},
+  bio::meta::pod_tuple{   "int"s, elem2}
 };
 inline bio::ranges::dictionary<std::string, elem_t, true> const & cdict = dict;
 
 TEST(het_dictionary_test, associated_types)
 {
-    EXPECT_SAME_TYPE((std::tuple<std::string const &, elem_t const &>), decltype(dict[0]));
+    EXPECT_SAME_TYPE((bio::meta::pod_tuple<std::string const &, elem_t const &>), decltype(dict[0]));
     EXPECT_SAME_TYPE(elem_t const &, decltype(dict["foo"]));
 
     EXPECT_SAME_TYPE(decltype(dict)::reference, decltype(dict)::const_reference);
